@@ -1,20 +1,14 @@
 'use strict';
+const Sequelize = require('sequelize');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-   await queryInterface.createTable('Person', {
-      name: Sequelize.DataTypes.STRING,
-      isBetaMember: {
-        type: Sequelize.DataTypes.BOOLEAN,
-        defaultValue: false,
-        allowNull: false
-      },
-      userId: {
-        type: Sequelize.DataTypes.INTEGER,
-        allowNull: false
-      },
-    });
+
+      await queryInterface.sequelize.query(" CREATE TABLE  `users` ( `id` INT NOT NULL AUTO_INCREMENT ,  `email` VARCHAR(222) NOT NULL ,  `name` VARCHAR(200) NOT NULL ,  `created_at` DATETIME NOT NULL ,  `updated_at` DATETIME NOT NULL ,  `password` TEXT NOT NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB; ");
+
+    await queryInterface.sequelize.query(" ALTER TABLE `users` CHANGE `created_at` `createdAt` DATETIME NOT NULL;  ALTER TABLE `users` CHANGE `updated_at` `updatedAt` DATETIME NOT NULL; ");
+
 
 
 
