@@ -25,7 +25,15 @@
 </head>
 <body>
 
-<main><%- body %></main>
+<main>
+
+  <div class="container-scroller">
+    <%- include('header.ejs') %>
+
+  <%- body %>
+
+  </div>
+</main>
 
 
 <!-- plugins:js -->
