@@ -23,15 +23,19 @@
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
-<body>
+<body class="sidebar-dark">
 
 <main>
 
   <div class="container-scroller">
+
+
     <%- include('header.ejs') %>
+    <div class="container-fluid page-body-wrapper">
+      <%- include('sidebar.ejs') %>
 
   <%- body %>
-
+    </div>
   </div>
 </main>
 

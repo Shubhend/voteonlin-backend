@@ -1,7 +1,9 @@
 const express = require('express')
 const { Sequelize } = require('sequelize');
 var path = require('path');
+const cookieParser = require("cookie-parser");
 const routes = require('./routes/admin'); // import the routes
+
 var bodyParser = require('body-parser');
 var session = require('express-session')
 
@@ -12,13 +14,19 @@ const port = 3000
 app.use(expressLayouts)
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(session({ secret: 'keyboard cat',resave: false, saveUninitialized: true, cookie: { maxAge: 60000 }}))
+
 app.set('layout', './layout/layout');
+app.use(cookieParser());
 app.set('view engine', 'ejs')
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'));
 app.set('views', path.join(__dirname, '/views'));
-//db.sequelize.sync();
+app.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
+app.use(express.static("public"));
+
+// db.sequelize.sync();
 app.use('/', routes); //to use the routes
+
+
 /*
 const sequelize = new Sequelize('database', 'username', 'password', {
     host: 'localhost',
@@ -26,7 +34,6 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 });
 
 */
-
 
 
 app.listen(port, () => {
